@@ -18,6 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
+import androidx.compose.foundation.ExperimentalFoundationApi
 
 data class OnboardingSlide(
     val title: String,
@@ -48,6 +49,7 @@ val ONBOARDING_SLIDES = listOf(
     )
 )
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun OnboardingScreen(
     onComplete: () -> Unit,
