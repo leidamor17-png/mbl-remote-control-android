@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MBLRemote Control</string>
+    <string name="onboarding_title_1">Bem-vindo ao MBLRemote</string>
+    <string name="onboarding_desc_1">Controle seus projetores Android MBL via Wi-Fi com facilidade e precisão.</string>
+    <string name="onboarding_title_2">Permissões Necessárias</string>
+    <string name="onboarding_desc_2">Este app precisa de acesso à rede local para se comunicar com seu projetor. Certifique-se de que ambos os dispositivos estão na mesma rede Wi-Fi.</string>
+    <string name="onboarding_title_3">Instale o Companion</string>
+    <string name="onboarding_desc_3">Você precisa instalar o app Companion no seu projetor MBL. Ele funcionará em background e receberá seus comandos.</string>
+    <string name="onboarding_title_4">Pronto para Começar</string>
+    <string name="onboarding_desc_4">Agora você pode conectar ao seu projetor e começar a controlar. Aproveite!</string>
+    <string name="connection_title">Controle Remoto</string>
+    <string name="connection_subtitle">Conecte ao seu projetor MBL</string>
+    <string name="connection_ip_label">Endereço IP</string>
+    <string name="connection_ip_hint">192.168.1.100</string>
+    <string name="connection_port_label">Porta</string>
+    <string name="connection_port_hint">5000</string>
+    <string name="connection_recent_devices">Dispositivos Recentes</string>
+    <string name="connection_button_connect">Conectar</string>
+    <string name="connection_button_connecting">Conectando...</string>
+    <string name="control_title">Controle Remoto</string>
+    <string name="control_navigation">Navegação</string>
+    <string name="control_button_back">Voltar</string>
+    <string name="control_button_home">Home</string>
+    <string name="control_button_disconnect">Desconectar</string>
+    <string name="status_connected">Conectado</string>
+    <string name="status_connecting">Conectando...</string>
+    <string name="status_disconnected">Desconectado</string>
+    <string name="status_error">Erro</string>
+</resources>
