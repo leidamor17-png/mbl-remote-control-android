@@ -6,7 +6,7 @@ plugins {
 android {
     namespace = "com.manus.mblremote"
     compileSdk = 34
-
+}
     defaultConfig {
         applicationId = "com.manus.mblremote"
         minSdk = 24
