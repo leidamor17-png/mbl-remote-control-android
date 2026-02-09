@@ -85,8 +85,7 @@ dependencies {
     implementation("com.android.billingclient:billing:6.1.0")
 
     // Haptics
-    implementation("androidx.hapticfeedback:hapticfeedback:1.0.0-alpha01")
-
+  
     // Testing
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
