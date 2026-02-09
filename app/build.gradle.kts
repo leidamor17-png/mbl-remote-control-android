@@ -6,7 +6,7 @@ plugins {
 android {
     namespace = "com.manus.mblremote"
     compileSdk = 34
-}
+
     defaultConfig {
         applicationId = "com.manus.mblremote"
         minSdk = 24
@@ -38,7 +38,7 @@ android {
     }
     buildFeatures {
         compose = true
-    
+    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
