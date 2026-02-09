@@ -1,6 +1,6 @@
 package com.manus.mblremote.ui.theme
 
-import androidx.compose.foundation.isSystemInDarkMode
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
@@ -23,7 +23,7 @@ private val DarkColorScheme = darkColorScheme(
 
 @Composable
 fun MBLRemoteTheme(
-    darkTheme: Boolean = isSystemInDarkMode(),
+darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
