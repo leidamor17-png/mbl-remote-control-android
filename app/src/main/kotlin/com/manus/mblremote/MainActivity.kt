@@ -8,6 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -41,9 +42,12 @@ class MainActivity : ComponentActivity() {
 fun MBLRemoteApp() {
     val navController = rememberNavController()
 
-    // Inicializar repositório e ViewModel
+    // ✅ CONTEXTO FORA DO remember
+    val context = LocalContext.current
+
+    // ✅ Objetos estáveis
     val socketClient = remember { SocketClient() }
-    val dataStore = remember { PreferencesDataStoreImpl(androidx.compose.ui.platform.LocalContext.current) }
+    val dataStore = remember { PreferencesDataStoreImpl(context) }
     val repository = remember { ConnectionRepository(socketClient, dataStore) }
 
     NavHost(
@@ -84,6 +88,7 @@ fun ConnectionScreenContainer(
     val viewModel: ConnectionViewModel = viewModel(
         factory = object : androidx.lifecycle.ViewModelProvider.Factory {
             override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T {
+                @Suppress("UNCHECKED_CAST")
                 return ConnectionViewModel(repository) as T
             }
         }
@@ -97,21 +102,17 @@ fun ConnectionScreenContainer(
         recentDevices = recentDevices,
         onConnect = { ip, port ->
             viewModel.connect(ip, port)
-            // Navegar após conexão bem-sucedida
-            if (connectionState is ConnectionState.Connected) {
-                navController.navigate("control")
-            }
         },
         onSelectRecent = { device ->
             viewModel.connect(device.ip, device.port)
         }
     )
 
-    // Observar mudanças de conexão
+    // ✅ navegação reagindo ao estado
     LaunchedEffect(connectionState) {
         if (connectionState is ConnectionState.Connected) {
             navController.navigate("control") {
-                popUpTo("connection") { saveState = true }
+                popUpTo("connection") { inclusive = true }
             }
         }
     }
@@ -125,6 +126,7 @@ fun ControlScreenContainer(
     val viewModel: ConnectionViewModel = viewModel(
         factory = object : androidx.lifecycle.ViewModelProvider.Factory {
             override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T {
+                @Suppress("UNCHECKED_CAST")
                 return ConnectionViewModel(repository) as T
             }
         }
@@ -134,21 +136,11 @@ fun ControlScreenContainer(
 
     ControlScreen(
         connectionState = connectionState,
-        onDirectionalPress = { key ->
-            // Enviar comando baseado na tecla pressionada
-        },
-        onVolumeUp = {
-            // Enviar comando de volume up
-        },
-        onVolumeDown = {
-            // Enviar comando de volume down
-        },
-        onBack = {
-            // Enviar comando back
-        },
-        onHome = {
-            // Enviar comando home
-        },
+        onDirectionalPress = { /* TODO */ },
+        onVolumeUp = { /* TODO */ },
+        onVolumeDown = { /* TODO */ },
+        onBack = { /* TODO */ },
+        onHome = { /* TODO */ },
         onDisconnect = {
             viewModel.disconnect()
             navController.navigate("connection") {
