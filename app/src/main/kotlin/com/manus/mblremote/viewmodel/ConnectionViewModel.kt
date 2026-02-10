@@ -16,39 +16,22 @@ class ConnectionViewModel(
         MutableStateFlow<ConnectionState>(ConnectionState.Disconnected)
     val connectionState: StateFlow<ConnectionState> = _connectionState
 
-    private val _errorMessage = MutableStateFlow<String?>(null)
-    val errorMessage: StateFlow<String?> = _errorMessage
-
     fun connect(ip: String, port: Int) {
+        _connectionState.value = ConnectionState.Connecting
+
         viewModelScope.launch {
             try {
-                // 🔹 SIMULA conexão (por enquanto)
-                if (ip.isBlank() || port <= 0) {
-                    throw IllegalArgumentException("IP ou porta inválidos")
-                }
-
-                // 👉 AQUI no futuro entra o socket real
-                // repository.connect(ip, port)
-
-                // ✅ Simulação de sucesso
+                repository.connect(ip, port)
                 _connectionState.value = ConnectionState.Connected
-
             } catch (e: Exception) {
-                _connectionState.value = ConnectionState.Error
-                _errorMessage.value =
-                    "Não foi possível conectar. Verifique o IP e a porta."
+                _connectionState.value =
+                    ConnectionState.Error(e.message ?: "Erro ao conectar")
             }
         }
     }
 
     fun disconnect() {
-        viewModelScope.launch {
-            // repository.disconnect()
-            _connectionState.value = ConnectionState.Disconnected
-        }
-    }
-
-    fun clearError() {
-        _errorMessage.value = null
+        repository.disconnect()
+        _connectionState.value = ConnectionState.Disconnected
     }
 }
