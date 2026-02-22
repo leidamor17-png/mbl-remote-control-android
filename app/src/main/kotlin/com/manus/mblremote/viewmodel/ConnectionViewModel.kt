@@ -31,7 +31,16 @@ class ConnectionViewModel(
     }
 
     fun disconnect() {
-        repository.disconnect()
-        _connectionState.value = ConnectionState.Disconnected
+        viewModelScope.launch {
+            try {
+                repository.disconnect()
+            } catch (e: Exception) {
+                _connectionState.value =
+                    ConnectionState.Error(e.message ?: "Erro ao desconectar")
+                return@launch
+            }
+
+            _connectionState.value = ConnectionState.Disconnected
+        }
     }
 }
