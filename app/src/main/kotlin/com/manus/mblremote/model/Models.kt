@@ -41,7 +41,7 @@ data class RemoteDevice(
 sealed class ConnectionState {
     object Disconnected : ConnectionState()
     object Connecting : ConnectionState()
-    data class Connected(val device: RemoteDevice) : ConnectionState()
+    object Connected : ConnectionState()   // ✅ CORRIGIDO AQUI
     data class Error(val message: String) : ConnectionState()
 }
 
